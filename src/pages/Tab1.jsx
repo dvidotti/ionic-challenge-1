@@ -19,12 +19,13 @@ import { book, build, colorFill, grid } from 'ionicons/icons';
 import React from 'react';
 import './Tab1.css';
 
-const Tab1: React.FC = () => {
+const Tab1 = ({user}) => {
+  console.log(user)
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab One</IonTitle>
+          <IonTitle>{user}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
@@ -32,7 +33,7 @@ const Tab1: React.FC = () => {
           <img src="/assets/shapes.svg" alt="" />
           <IonCardHeader>
             <IonCardSubtitle>Get Started</IonCardSubtitle>
-            <IonCardTitle>Welcome to Ionic</IonCardTitle>
+            <IonCardTitle>{user}</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
             <p>
