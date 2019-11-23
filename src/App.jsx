@@ -3,6 +3,10 @@ import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
   IonRouterOutlet,
+  IonTitle,
+  IonMenuButton,
+  IonButtons,
+  IonContent
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import LoginForm from './pages/Login';
@@ -29,17 +33,29 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-const App = () => {
-  const [user, setUser] = useState(null);
+const App = (props) => {
+  const [user, setUser] = useState(false);
   return (
-  <IonApp>
+  <IonApp> 
+    {user && 
+      <IonContent>
+      <Ion-Header>
+        <Ion-Toolbar>
+          <IonTitle>MenuTitle</IonTitle>
+          <IonButtons slot="start">
+            <IonMenuButton autoHide="false"></IonMenuButton>
+          </IonButtons>
+        </Ion-Toolbar>
+      </Ion-Header>
+      <Menu/>
+      </IonContent>
+    }
     <IonReactRouter>
         <IonRouterOutlet>
           <Route path="/login" render={(props) => <LoginForm user={user} {...props} setUser={setUser}/>} exact={true}/>
-          <Route path="/apollo" render={(props) => <ApolloFeed user={user} {...props} setUser={setUser}/>} exact={true}/>
-          <Route path="/menu" render={(props) => <Menu {...props} user={user}/>} exact={true} />
-          <Route path="/details" component={Details} />
-          <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />
+          <Route path="/apollo" render={(props) => <ApolloFeed user={user} {...props} />} exact={true}/>
+          <Route path="/details/:idx" render={(props) => <Details {...props} user={user}/>} exact={true} />
+          <Route path="/" render={() => <Redirect to="/login" />} exact={true} />
         </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

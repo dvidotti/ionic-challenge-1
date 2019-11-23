@@ -1,101 +1,54 @@
-import React from 'react';
-import { IonMenu, IonHeader, IonToolbar, IonIcon, IonLabel, IonMenuToggle, IonTitle, IonContent, IonList, IonItem, IonRouterOutlet, IonPage } from '@ionic/react';
+import React, { useState } from 'react';
+import { IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonMenuToggle, IonIcon, IonLabel, IonItem, IonPage, IonRouterOutlet } from "@ionic/react";
+import './Menu.css'
+import {Redirect} from 'react-router-dom'
+
+const pages = [
+  { title: 'Apollo', path: '/apollo', icon: 'home' },
+  { title: 'Login', path: '/login', icon: 'information' }
+];
+
+
 
 const Menu = () => {
+  const [activePage, setActivePage] = useState(pages[0].title);
+  const navigateToPage = (page) => {
+   setActivePage(page.title);
+   console.log(page)
+  return <Redirect to={page}/>;
+  }
+
+  const renderMenuItems = () => {
+    return pages.map((page) => (
+        <IonMenuToggle key={page.title} auto-hide="false">
+            <IonItem button routerLink={page.path}
+                color={page.title === activePage ? 'primary' : ''}>
+                <IonIcon slot="start" name={page.icon}></IonIcon>
+                <IonLabel>
+                    {page.title}
+                </IonLabel>
+            </IonItem>
+        </IonMenuToggle>
+    ));
+}
   return (
-    <IonPage>
-      <IonList>
+    <IonContent>
+      <IonMenu className="z-index-menu" contentId="my-content" side="start">
         <IonHeader>
-        <IonToolbar color="primary">
-          <IonTitle>Start Menu</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-        <IonItem href="./login">Dashboard</IonItem>
-        <IonItem>Photos</IonItem>
-        <IonItem>Available Mission</IonItem>
-        <IonItem>My Missions</IonItem>
-        <IonItem>Chat</IonItem>
-      </IonList>
-    </IonPage>
-
-  // ---------------- IonMenu implementation (try later) ----------------
-  //   <IonMenu contentId="main">
-  //   <IonHeader>
-  //     <IonToolbar color="primary">
-  //       <IonTitle>Menu</IonTitle>
-  //     </IonToolbar>
-  //   </IonHeader>
-  //   <IonContent color="primary">
-  //     <IonList style= {{ background : '#3880ff'}} color="primary">
-        
-  //           <IonMenuToggle  auto-hide="false">
-  //             <IonItem color="primary">
-  //               <IonIcon slot="start" />
-  //               <IonLabel>HELP</IonLabel>
-  //             </IonItem>
-  //           </IonMenuToggle>
-        
-        
-  //     </IonList>
-  //   </IonContent>
-  // </IonMenu>
-
-
-
-
-  //   <>
-  //   <IonMenu side="start" contendId="my-content" >
-  //     <IonHeader>
-  //       <IonToolbar color="primary">
-  //         <IonTitle>Start Menu</IonTitle>
-  //       </IonToolbar>
-  //     </IonHeader>
-  //     <IonContent>
-  //       <IonList>
-  //         <IonItem>Menu Item</IonItem>
-  //         <IonItem>Menu Item</IonItem>
-  //         <IonItem>Menu Item</IonItem>
-  //         <IonItem>Menu Item</IonItem>
-  //         <IonItem>Menu Item</IonItem>
-  //       </IonList>
-  //     </IonContent>
-  //   </IonMenu>
-
-  //   <IonMenu side="start" contendId="my-content"  class="my-custom-menu">
-  //     <IonHeader>
-  //       <IonToolbar color="tertiary">
-  //         <IonTitle>Custom Menu</IonTitle>
-  //       </IonToolbar>
-  //     </IonHeader>
-  //     <IonContent>
-  //       <IonList>
-  //         <IonItem>Menu Item</IonItem>
-  //         <IonItem>Menu Item</IonItem>
-  //         <IonItem>Menu Item</IonItem>
-  //         <IonItem>Menu Item</IonItem>
-  //         <IonItem>Menu Item</IonItem>
-  //       </IonList>
-  //     </IonContent>
-  //   </IonMenu>
-
-  //   <IonMenu side="end" contendId="my-content" type="push">
-  //     <IonHeader>
-  //       <IonToolbar color="danger">
-  //         <IonTitle>End Menu</IonTitle>
-  //       </IonToolbar>
-  //     </IonHeader>
-  //     <IonContent>
-  //       <IonList>
-  //         <IonItem>Menu Item</IonItem>
-  //         <IonItem>Menu Item</IonItem>
-  //         <IonItem>Menu Item</IonItem>
-  //         <IonItem>Menu Item</IonItem>
-  //         <IonItem>Menu Item</IonItem>
-  //       </IonList>
-  //     </IonContent>
-  //   </IonMenu>
-  //   <IonRouterOutlet id="my-content"></IonRouterOutlet>
-  // </>
+            <IonToolbar>
+                <IonTitle>
+                    Menu
+                </IonTitle>
+            </IonToolbar>
+        </IonHeader>
+        <IonContent>
+            <IonList>
+                { renderMenuItems() }
+            </IonList>
+        </IonContent>
+      </IonMenu>
+      <IonRouterOutlet id="my-content" main></IonRouterOutlet>
+    </IonContent>   
 );
 }
 

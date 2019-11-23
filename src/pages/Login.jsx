@@ -20,16 +20,14 @@ const LoginForm = ({user, setUser, history}) => {
   console.log(user)
   const [ email, setEmail ] = useState(null);
   const [ password, setPassword ] = useState(null);
-  const [isAuth, setAuth ] = useState('false');
-  // const [user, setUser ] = useState(null)
 
   const [ formErrors, setFormErrors ] = useState({});
 
   const submit = () => {
     console.log(email, password)
     if (email === "dev@yoobic.com" && password === "1234") {
-      setUser('Batman');
-      history.push('/menu');
+      setUser('Yuri');
+      history.push('/apollo');
     } else console.log('wrong password')
   }
 
