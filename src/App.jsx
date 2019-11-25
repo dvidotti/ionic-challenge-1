@@ -62,10 +62,11 @@ const App = (props) => {
               </IonContent>
               <IonReactRouter> 
                 <IonRouterOutlet>
-                  <Route exact 
+                  <Route  
+                    exact 
                     path="/login" 
-                    render={props => <Redirect to='/apollo' />}
-                    />
+                    render={props => <LoginForm {...props} />}
+                  />
                   <Route 
                     exact
                     path="/apollo" 

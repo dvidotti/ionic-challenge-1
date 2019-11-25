@@ -31,6 +31,9 @@ const Details = (props) => {
           </IonButtons>
         </IonToolbar>
       </IonHeader>
+      <IonButtons slot="start">
+            <IonBackButton defaultHref="/apollo" />Back
+          </IonButtons>
       <IonContent>
       {apiResult.length && 
         <IonCard>
